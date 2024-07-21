@@ -1,1 +1,1 @@
-DJango Project where you can register students along with their details such as last name, date of birth and email. The details of all registered students can be downloaded as a pdf by chnaging the url from "register_student" to "generate_pdf".
+DJango Project where you can register students along with their details such as last name, date of birth and email. The details of all registered students can be downloaded as a pdf by chnaging the url from "register" to "generate_pdf".
