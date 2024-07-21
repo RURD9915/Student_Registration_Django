@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Registration</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#registration-form").on("submit", function (event) {
+          event.preventDefault();
+          $.ajax({
+            url: $(this).attr("action"),
+            method: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+              if (response.status === "success") {
+                alert(response.message);
+                $("#registration-form")[0].reset();
+              } else {
+                alert("Error: " + JSON.stringify(response.errors));
+              }
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Student Registration</h1>
+    <form
+      id="registration-form"
+      action="{% url 'register_student' %}"
+      method="post"
+    >
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Register</button>
+    </form>
+  </body>
+</html>
