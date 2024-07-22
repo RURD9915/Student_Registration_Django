@@ -43,3 +43,22 @@ def generate_pdf(request):
 
     response.write(pdf)
     return response
+
+
+def generate_csv(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="students.csv"'
+
+    # Create a CSV writer object using the HttpResponse as the file.
+    writer = csv.writer(response)
+    
+    # Write the header row
+    writer.writerow(['First Name', 'Last Name', 'Email'])
+    
+    # Write data rows
+    for student in Student.objects.all():
+        writer.writerow([student.first_name, student.last_name, student.email])
+    
+    return response
+
